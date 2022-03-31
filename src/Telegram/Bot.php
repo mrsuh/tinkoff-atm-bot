@@ -10,6 +10,7 @@ use App\Telegram\Command\CancelCommand;
 use App\Telegram\Command\ClearCommand;
 use App\Telegram\Command\CommandInterface;
 use App\Telegram\Command\ContactsCommand;
+use App\Telegram\Command\DebugCommand;
 use App\Telegram\Command\HelpCommand;
 use App\Telegram\Command\ListCommand;
 use App\Telegram\Command\StartCommand;
@@ -28,6 +29,7 @@ class Bot
         private ListCommand $listCommand,
         private StartCommand $startCommand,
         private CancelCommand $cancelCommand,
+        private DebugCommand $debugCommand,
         private ConversationRepository $conversationRepository,
         private Environment $twig
     )
@@ -44,7 +46,8 @@ class Bot
             HelpCommand::NAME     => $this->helpCommand,
             ListCommand::NAME     => $this->listCommand,
             StartCommand::NAME    => $this->startCommand,
-            CancelCommand::NAME   => $this->cancelCommand
+            CancelCommand::NAME   => $this->cancelCommand,
+            DebugCommand::NAME    => $this->debugCommand,
         ];
 
         return $commands[$name] ?? null;
