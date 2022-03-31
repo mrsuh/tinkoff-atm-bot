@@ -1,0 +1,9 @@
+{% if notifications|length == 0 %}
+У вас еще нет ни одного напоминания
+{% else %}
+Ваши напоминания:
+
+{% for notification in notifications %}
+<b>{{ notification.atm.id }}</b> / <b>{{ notification.amount }} {{ notification.currency }}</b> - {{ notification.atm.address }}
+{% endfor %}
+{% endif %}
