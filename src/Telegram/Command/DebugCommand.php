@@ -29,7 +29,7 @@ class DebugCommand implements CommandInterface
 
         $this->bot->sendMessage(
             $update->getMessage()->getChat()->getId(),
-            $this->twig->render('contacts.html.twig', [
+            $this->twig->render('debug.html.twig', [
                 'notificationsCount'        => $this->notificationRepository->countAll(),
                 'handledNotificationsCount' => $this->notificationRepository->countHandled(),
                 'usersCount'                => $this->notificationRepository->countUsers(),
