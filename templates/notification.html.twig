@@ -1,1 +1,6 @@
-<b>{{ notification.atm.id }}</b> / <b>{{ notification.amount }} {{ notification.currency }}</b> - {{ notification.atm.address }}
+Ты просил напомнить тебе, когда в банкомате <b>{{ notification.atm.id }}</b> появится <b>{{ notification.amount|number_format }} {{ notification.currency }}</b>.
+Сейчас в банкомате доступно:
+* {{ atm.usd|number_format }} <b>USD</b>
+* {{ atm.eur|number_format }} <b>EUR</b>
+* {{ atm.rub|number_format }} <b>RUB</b>
+Адрес банкомата: {{ notification.atm.address }}

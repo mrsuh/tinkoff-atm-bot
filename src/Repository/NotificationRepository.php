@@ -26,4 +26,40 @@ class NotificationRepository extends ServiceEntityRepository
     {
         return $this->findBy(['chatId' => $chatId]);
     }
+
+    public function countAll(): int
+    {
+        $result = $this
+            ->createQueryBuilder('n')
+            ->select('COUNT(n.id) as count')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result['count'] ?? 0;
+    }
+
+    public function countHandled(): int
+    {
+        $result = $this
+            ->createQueryBuilder('n')
+            ->select('COUNT(n.id) as count')
+            ->where('n.handled = :handled')
+            ->setParameter('handled', true)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result['count'] ?? 0;
+    }
+
+    public function countUsers(): int
+    {
+        $result = $this
+            ->createQueryBuilder('n')
+            ->select('COUNT(n.chatId) as count')
+            ->groupBy('n.chatId')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result['count'] ?? 0;
+    }
 }

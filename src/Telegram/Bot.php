@@ -64,7 +64,7 @@ class Bot
 
         $conversation = $this->conversationRepository->findOneByChatId($chatId);
         if ($conversation === null) {
-            $this->botApi->sendMessage($chatId, 'Я не понимаю(');
+            $this->error($chatId);
 
             return;
         }
@@ -76,7 +76,7 @@ class Bot
             return;
         }
 
-        $this->botApi->sendMessage($chatId, 'Я не понимаю((');
+        $this->error($chatId);
     }
 
     public function notify(Notification $notification, Atm $atm): void
@@ -84,6 +84,15 @@ class Bot
         $this->botApi->sendMessage(
             $notification->getChatId(),
             $this->twig->render('notification.html.twig', ['notification' => $notification, 'atm' => $atm]),
+            'html'
+        );
+    }
+
+    public function error(string $chatId): void
+    {
+        $this->botApi->sendMessage(
+            $chatId,
+            $this->twig->render('error.html.twig'),
             'html'
         );
     }

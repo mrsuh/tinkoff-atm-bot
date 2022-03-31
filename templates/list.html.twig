@@ -1,7 +1,7 @@
 {% if notifications|length == 0 %}
-У вас еще нет ни одного напоминания
+У тебя еще нет ни одного напоминания {{ '\xF0\x9F\x98\x9E'|raw }}
 {% else %}
-Ваши напоминания:
+Твои напоминания:
 
 {% for notification in notifications %}
 <b>{{ notification.atm.id }}</b> / <b>{{ notification.amount }} {{ notification.currency }}</b> - {{ notification.atm.address }}

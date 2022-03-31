@@ -8,6 +8,7 @@ use App\Repository\NotificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
+use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\Update;
 
 class ClearCommand implements CommandInterface
@@ -60,9 +61,8 @@ class ClearCommand implements CommandInterface
                     throw $exception;
                 }
 
-                if ($text === 'Да') {
-                    $this->bot->sendMessage($chatId, 'Готово!');
-                }
+                $this->bot->sendMessage($chatId, 'Готово!', replyMarkup: new ReplyKeyboardRemove());
+
                 break;
             default:
                 throw new \RuntimeException();

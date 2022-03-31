@@ -10,6 +10,7 @@ use App\Repository\ConversationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
+use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\Update;
 use Twig\Environment;
 
@@ -70,7 +71,7 @@ class AddCommand implements CommandInterface
                 $conversation->updateData(['currency' => $text]);
                 $conversation->setState(self::STATE_AMOUNT);
                 $this->entityManager->flush();
-                $this->bot->sendMessage($chatId, 'При достижении какого количества уведомлять?');
+                $this->bot->sendMessage($chatId, 'При достижении какого количества уведомлять?', replyMarkup: new ReplyKeyboardRemove());
                 break;
             case self::STATE_AMOUNT:
                 if ((int)$text < 0) {

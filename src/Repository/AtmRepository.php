@@ -23,4 +23,14 @@ class AtmRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['id' => $id]);
     }
+
+    public function findOneLastUpdated(): ?Atm
+    {
+        return $this
+            ->createQueryBuilder('atm')
+            ->orderBy('atm.updatedAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
