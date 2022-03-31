@@ -55,11 +55,11 @@ class NotificationRepository extends ServiceEntityRepository
     {
         $result = $this
             ->createQueryBuilder('n')
-            ->select('COUNT(n.chatId) as count')
+            ->select('n.chatId')
             ->groupBy('n.chatId')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
 
-        return $result['count'] ?? 0;
+        return count($result);
     }
 }

@@ -33,7 +33,7 @@ class DebugCommand implements CommandInterface
                 'notificationsCount'        => $this->notificationRepository->countAll(),
                 'handledNotificationsCount' => $this->notificationRepository->countHandled(),
                 'usersCount'                => $this->notificationRepository->countUsers(),
-                'lastUpdatedAt'             => $atm ? $atm->getUpdatedAt()->format('Y-m-d H:i:s') : ''
+                'lastUpdatedAt'             => $atm ? $atm->getUpdatedAt()->format(\DateTimeInterface::RFC3339) : ''
             ]),
             'html',
             true
