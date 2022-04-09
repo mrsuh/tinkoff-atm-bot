@@ -14,6 +14,7 @@ use App\Telegram\Command\DebugCommand;
 use App\Telegram\Command\HelpCommand;
 use App\Telegram\Command\ListCommand;
 use App\Telegram\Command\StartCommand;
+use App\Telegram\Command\WarnCommand;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\Update;
 use Twig\Environment;
@@ -30,6 +31,7 @@ class Bot
         private StartCommand $startCommand,
         private CancelCommand $cancelCommand,
         private DebugCommand $debugCommand,
+        private WarnCommand $warnCommand,
         private ConversationRepository $conversationRepository,
         private Environment $twig
     )
@@ -55,6 +57,9 @@ class Bot
 
     public function handle(Update $update): void
     {
+        $this->warnCommand->handle($update);// @todo
+        return;
+
         $text    = $update->getMessage()->getText();
         $chatId  = $update->getMessage()->getChat()->getId();
         $command = $this->getCommandByName($text);
